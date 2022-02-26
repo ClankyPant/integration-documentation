@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer permanent dark app>
+  <v-navigation-drawer width="18vw" permanent dark app>
     <Treeview />
   </v-navigation-drawer>
 </template>
@@ -13,9 +13,3 @@ import Treeview from "@/components/Treeview.vue";
 })
 export default class SideBar extends Vue {}
 </script>
-
-<style scoped>
-.document_pointer {
-  cursor: pointer;
-}
-</style>

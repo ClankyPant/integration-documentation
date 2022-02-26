@@ -6,6 +6,7 @@
         <v-icon v-if="item.file">
           {{ open ? "mdi-folder-open" : "mdi-folder" }}
         </v-icon>
+        <v-icon v-else> mdi-file-document-outline </v-icon>
       </template>
 
       <!-- Name Block -->
@@ -17,7 +18,7 @@
 
       <!-- Add New File Block -->
       <template v-slot:append="{ item }">
-        <v-btn v-show="item.file" icon plain @click="openDocumentCreation()">
+        <v-btn v-show="item.file" icon plain @click="openDialog(item)">
           <v-icon size="16">mdi-plus</v-icon>
         </v-btn>
       </template>
@@ -26,11 +27,20 @@
     <!-- Dialog Block -->
     <Dialog v-model="showDialog" title="New Document">
       <template v-slot:content>
-        <v-text-field dense outlined label="Name"></v-text-field>
+        <v-text-field
+          dense
+          outlined
+          label="Name"
+          v-model="newDirectoryName"
+          :counter="MAX_NAME_LENGTH"
+        >
+        </v-text-field>
       </template>
       <template v-slot:button>
-        <v-btn @click="cancelNewDocument()" text> Cancel </v-btn>
-        <v-btn @click="createNewDocument()" text> Create </v-btn>
+        <v-btn @click="closeDialog()" text> Cancel </v-btn>
+        <v-btn :disabled="isInvalidName" @click="createNewDocument()" text>
+          Create
+        </v-btn>
       </template>
     </Dialog>
   </div>
@@ -49,28 +59,34 @@ export default class SideBar extends Vue {
   creatingNew = false;
   showDialog = false;
 
-  openDocumentCreation(): void {
+  MAX_NAME_LENGTH = 20;
+  newDirectoryName = "";
+  newDirectoryFather!: DirectoryModel;
+  directoryArray = DirectoryService.getAllDocument();
+
+  openDialog(directoryFather: DirectoryModel): void {
+    this.newDirectoryFather = directoryFather;
     this.showDialog = true;
   }
 
   createNewDocument(): void {
     DirectoryService.saveNewDocument(
-      this.directoryArray[0],
-      new DirectoryModel(Math.random(), "Teste", [], false)
+      this.newDirectoryFather,
+      new DirectoryModel(Math.random(), this.newDirectoryName, [], false)
     );
 
-    console.log(this.directoryArray);
-    console.log("Criou");
+    this.closeDialog();
+    this.newDirectoryName = "";
+    this.directoryArray = DirectoryService.getAllDocument();
   }
 
-  cancelNewDocument(): void {
+  closeDialog(): void {
+    this.newDirectoryName = "";
     this.showDialog = false;
   }
 
-  get directoryArray(): DirectoryModel[] {
-    let result: DirectoryModel[] = DirectoryService.getAllDocument();
-
-    return result;
+  get isInvalidName(): boolean {
+    return this.newDirectoryName.length > this.MAX_NAME_LENGTH;
   }
 }
 </script>

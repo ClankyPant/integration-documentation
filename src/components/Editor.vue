@@ -14,7 +14,6 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import EditorJS from "@editorjs/editorjs";
-import Table from "@editorjs/table";
 
 @Component({})
 export default class Editor extends Vue {

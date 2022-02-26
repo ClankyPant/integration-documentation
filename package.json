@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@editorjs/editorjs": "^2.23.2",
+    "@editorjs/header": "^2.6.2",
+    "@editorjs/table": "^2.0.1",
     "eslint-plugin-vue": "^8.5.0",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",

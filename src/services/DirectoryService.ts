@@ -6,8 +6,15 @@ export default class DirectoryService {
   public static getAllDocument(): DirectoryModel[] {
     if (this.server.length <= 0) {
       const id = Math.random() * 100000000;
-
-      this.server.push(new DirectoryModel(id | 0, "Collection", [], true));
+      const id2 = Math.random() * 100000000;
+      this.server.push(
+        new DirectoryModel(
+          id | 0,
+          "Collection",
+          [new DirectoryModel(id2, "Documentation", [], false)],
+          true
+        )
+      );
     }
 
     return this.server;

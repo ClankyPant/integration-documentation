@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer width="18vw" permanent dark app>
+  <v-navigation-drawer width="18rem" dark app>
     <Treeview />
   </v-navigation-drawer>
 </template>

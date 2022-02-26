@@ -1,8 +1,6 @@
 <template>
   <v-app>
     <SideBar />
-
-    <!-- <SideBar /> -->
     <v-main>
       <router-view />
     </v-main>

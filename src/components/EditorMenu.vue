@@ -15,7 +15,7 @@
       dark
       @click="editor.chain().focus().setParagraph().run()"
     >
-      paragraph
+      Text
     </v-btn>
     <v-btn
       class="ma-2"
@@ -58,6 +58,18 @@
       @click="editor.chain().focus().toggleHeading({ level: 6 }).run()"
     >
       h6
+    </v-btn>
+    <v-btn
+      dark
+      @click="
+        editor
+          .chain()
+          .focus()
+          .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
+          .run()
+      "
+    >
+      insertTable
     </v-btn>
   </div>
 </template>

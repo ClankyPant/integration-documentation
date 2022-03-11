@@ -16,6 +16,13 @@ import { Component, Vue } from "vue-property-decorator";
 import { Editor, EditorContent } from "@tiptap/vue-2";
 import StarterKit from "@tiptap/starter-kit";
 import EditorMenu from "@/components/EditorMenu.vue";
+import Table from "@tiptap/extension-table";
+import TableRow from "@tiptap/extension-table-row";
+import TableCell from "@tiptap/extension-table-cell";
+import TableHeader from "@tiptap/extension-table-header";
+import Text from "@tiptap/extension-text";
+import Document from "@tiptap/extension-document";
+import Paragraph from "@tiptap/extension-paragraph";
 
 @Component({ components: { EditorContent, EditorMenu } })
 export default class EditorVue extends Vue {
@@ -23,12 +30,16 @@ export default class EditorVue extends Vue {
 
   editor = new Editor({
     content: "<p>I’m running Tiptap with Vue.js. 🎉</p>",
-    extensions: [StarterKit],
-    editorProps: {
-      attributes: {
-        class: "teste",
-      },
-    },
+    extensions: [
+      Document,
+      Paragraph,
+      Text,
+      Table,
+      TableRow,
+      TableCell,
+      StarterKit,
+      TableHeader,
+    ],
   });
 }
 

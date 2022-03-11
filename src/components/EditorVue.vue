@@ -5,6 +5,7 @@
       <v-card-title> Document title </v-card-title>
       <v-card-text>
         <div id="editorJs"></div>
+        <v-btn @click="save()">Salvar</v-btn>
       </v-card-text>
     </div>
   </v-card>
@@ -19,5 +20,11 @@ export default class EditorVue extends Vue {
   fileSelected = true;
 
   editor = EditorService.getEditor();
+
+  async save(): Promise<void> {
+     this.editor.save().then((result) => {
+      console.log(result);
+    });
+  }
 }
 </script>
